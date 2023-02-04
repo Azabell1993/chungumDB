@@ -104,3 +104,4 @@ SELECT * FROM SUBMIT_ORDER SO ;
 truncate `sonnim`;
 DELETE FROM ordertbl WHERE  MEMBER_ID = 'testUser03';
 (SUBMIT_ORDER는 삭제 하면 안됨.) -- SELECT SUM(ORDER_PAY) FROM SUBMIT_ORDER WHERE ORDER_DATE LIKE '%2023-02-03%'; (날짜를 범위로 잡아서 매출을 볼 수 있다.)
+
