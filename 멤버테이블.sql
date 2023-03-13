@@ -4,7 +4,7 @@ CREATE TABLE MEMBERTBL (
    ,MEMBER_PW            VARCHAR(12)      NOT NULL         COMMENT '회원 패스워드'
    ,MEMBER_GR            ENUM('Y','N')                     					COMMENT '회원 권한(N이면 기본유저, Y이면 카페 관리자)'
    ,MEMBER_NICKNAME      VARCHAR(10)      	UNIQUE              	 		COMMENT '회원 닉네임'
-   ,MEMBER_BIRTH         CHAR(20)      		NOTå NULL            			COMMENT '회원 생일'
+   ,MEMBER_BIRTH         CHAR(20)      		NOT NULL            			COMMENT '회원 생일'
    ,MEMBER_EMAIL         VARCHAR(30)      	NOT NULL 	UNIQUE         		COMMENT '회원 이메일'
    ,MEMBER_JOINDATE      DATETIME                        					COMMENT '가입 날짜'
    ,MEMBER_BLACKYN       ENUM('Y','N')                     				COMMENT '블랙리스트 유무(N:대상아님, Y:대상임)'
