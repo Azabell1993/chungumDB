@@ -9,7 +9,6 @@ CREATE TABLE MEMBERTBL (
    ,MEMBER_JOINDATE      DATETIME                        					COMMENT '가입 날짜'
    ,MEMBER_BLACKYN       ENUM('Y','N')                     				COMMENT '블랙리스트 유무(N:대상아님, Y:대상임)'
    ,MEMBER_EVENTQTY      INT                              					COMMENT '이벤트 당첨 누적 횟수'
-   ,PRIMARY KEY(MEMBER_ORDERNUM)
 ) DEFAULT CHARSET=utf8mb4;
 
 
