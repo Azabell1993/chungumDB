@@ -1,96 +1,143 @@
+
+-- create the table
+CREATE TABLE SUBMIT_ORDER (
+	ORDERNUM INT NOT NULL AUTO_INCREMENT COMMENT '번호'
+	,MENU            VARCHAR(20)     NOT NULL         COMMENT '카페 메뉴'
+   	,ORDER_COUNT     INT            NOT NULL         COMMENT '총 주문 수량'
+	,ORDER_PAY	 	 INT			NOT NULL 		COMMENT '총 주문 가격'
+	,ORDER_DATE 	DATETIME		NOT NULL			COMMENT '날짜'
+	,PRIMARY KEY(ORDERNUM)
+) DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE MENUTBL (
+   CAFE_MENU            VARCHAR(20)      PRIMARY KEY         COMMENT '카페 메뉴'
+   ,CAFE_MENU_DAE         VARCHAR(20)            NOT NULL         COMMENT '메뉴 대분류'
+   ,CAFE_MENU_NUM         INT            NOT NULL         COMMENT '메뉴 소분류(넘버링)'
+   ,CAFE_PRICE            INT            NOT NULL         COMMENT '카페 가격'
+) DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE MEMBERTBL (   
+   MEMBER_ID            VARCHAR(30)      PRIMARY KEY         COMMENT '회원 아이디'
+   ,MEMBER_PW            VARCHAR(12)      NOT NULL         COMMENT '회원 패스워드'
+   ,MEMBER_GR            ENUM('Y','N')                     					COMMENT '회원 권한(N이면 기본유저, Y이면 카페 관리자)'
+   ,MEMBER_NICKNAME      VARCHAR(10)      	UNIQUE              	 		COMMENT '회원 닉네임'
+   ,MEMBER_BIRTH         CHAR(20)      		NOT NULL            			COMMENT '회원 생일'
+   ,MEMBER_EMAIL         VARCHAR(30)      	NOT NULL 	UNIQUE         		COMMENT '회원 이메일'
+   ,MEMBER_JOINDATE      DATETIME                        					COMMENT '가입 날짜'
+   ,MEMBER_BLACKYN       ENUM('Y','N')                     				COMMENT '블랙리스트 유무(N:대상아님, Y:대상임)'
+   ,MEMBER_EVENTQTY      INT       
+) DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE SONNIM (
+   MEMBER_ORDERNUM       INT             	NOT NULL 	AUTO_INCREMENT 		COMMENT '번호(PK)'
+	,MEMBER_ID 				VARCHAR(30)		NOT NULL 		COMMENT '회원 아이디'
+	,MEMBER_ORDER_COUNT     INT            NOT NULL         COMMENT '총 주문 수량'
+	,MEMBER_ORDER_PAY	 	 INT			NOT NULL 		COMMENT '총 주문 가격'
+	,PRIMARY KEY(MEMBER_ORDERNUM)
+) DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE ORDERTBL (
+   MEMBER_ID            VARCHAR(30)      NOT NULL        COMMENT '회원 아이디'
+   ,MEMBER_MENU_NUM     VARCHAR(30)      NOT NULL         COMMENT '메뉴 넘버'
+   ,MEMBER_ORDER_COUNT      INT            NOT NULL         COMMENT '음료 주문 수'
+   ,MEMBER_ORDER_DATE      DATETIME      NOT NULL         COMMENT '주문한 날짜'
+) DEFAULT CHARSET=utf8mb4;
+
+-----------------------------------------------------------------------------------------------------
+
+-- add the member data
 -- 멤버 추가 
 INSERT INTO MEMBERTBL (
-	MEMBER_ID
-	,MEMBER_PW
-	,MEMBER_GR
-	,MEMBER_NICKNAME
-	,MEMBER_BIRTH
-	,MEMBER_EMAIL
-	,MEMBER_JOINDATE
-	,MEMBER_BLACKYN
-	,MEMBER_EVENTQTY)
+   MEMBER_ID
+   ,MEMBER_PW
+   ,MEMBER_GR
+   ,MEMBER_NICKNAME
+   ,MEMBER_BIRTH
+   ,MEMBER_EMAIL
+   ,MEMBER_JOINDATE
+   ,MEMBER_BLACKYN
+   ,MEMBER_EVENTQTY)
 VALUES (
-	'testUser00'
-	,'testUse0pas'
-	,'N'
-	,'nickexam00'
-	,'19930315'
-	,'test@test.co.kr'
-	,NOW()
-	,'N'
-	,0
+   'testUser00'
+   ,'testUse0pas'
+   ,'N'
+   ,'nickexam00'
+   ,'19930315'
+   ,'test@test.co.kr'
+   ,NOW()
+   ,'N'
+   ,0
 );
 
 INSERT INTO MEMBERTBL (
-	MEMBER_ID
-	,MEMBER_PW
-	,MEMBER_GR
-	,MEMBER_NICKNAME
-	,MEMBER_BIRTH
-	,MEMBER_EMAIL
-	,MEMBER_JOINDATE
-	,MEMBER_BLACKYN
-	,MEMBER_EVENTQTY)
+   MEMBER_ID
+   ,MEMBER_PW
+   ,MEMBER_GR
+   ,MEMBER_NICKNAME
+   ,MEMBER_BIRTH
+   ,MEMBER_EMAIL
+   ,MEMBER_JOINDATE
+   ,MEMBER_BLACKYN
+   ,MEMBER_EVENTQTY)
 VALUES (
-	'testUser01'
-	,'testUse1pas'
-	,'N'
-	,'nickexam01'
-	,'19831215'
-	,'test1@test.co.kr'
-	,NOW()
-	,'N'
-	,0
+   'testUser01'
+   ,'testUse1pas'
+   ,'N'
+   ,'nickexam01'
+   ,'19831215'
+   ,'test1@test.co.kr'
+   ,NOW()
+   ,'N'
+   ,0
 );
 
 INSERT INTO MEMBERTBL (
-	MEMBER_ID
-	,MEMBER_PW
-	,MEMBER_GR
-	,MEMBER_NICKNAME
-	,MEMBER_BIRTH
-	,MEMBER_EMAIL
-	,MEMBER_JOINDATE
-	,MEMBER_BLACKYN
-	,MEMBER_EVENTQTY)
+   MEMBER_ID
+   ,MEMBER_PW
+   ,MEMBER_GR
+   ,MEMBER_NICKNAME
+   ,MEMBER_BIRTH
+   ,MEMBER_EMAIL
+   ,MEMBER_JOINDATE
+   ,MEMBER_BLACKYN
+   ,MEMBER_EVENTQTY)
 VALUES (
-	'testUser02'
-	,'testUse1i23'
-	,'N'
-	,'nickexam02'
-	,'19900125'
-	,'test2@test.co.kr'
-	,NOW()
-	,'N'
-	,0
+   'testUser02'
+   ,'testUse1i23'
+   ,'N'
+   ,'nickexam02'
+   ,'19900125'
+   ,'test2@test.co.kr'
+   ,NOW()
+   ,'N'
+   ,0
 );
 
 INSERT INTO MEMBERTBL (
-	MEMBER_ID
-	,MEMBER_PW
-	,MEMBER_GR
-	,MEMBER_NICKNAME
-	,MEMBER_BIRTH
-	,MEMBER_EMAIL
-	,MEMBER_JOINDATE
-	,MEMBER_BLACKYN
-	,MEMBER_EVENTQTY)
+   MEMBER_ID
+   ,MEMBER_PW
+   ,MEMBER_GR
+   ,MEMBER_NICKNAME
+   ,MEMBER_BIRTH
+   ,MEMBER_EMAIL
+   ,MEMBER_JOINDATE
+   ,MEMBER_BLACKYN
+   ,MEMBER_EVENTQTY)
 VALUES (
-	'testUser03'
-	,'testUse3ws'
-	,'N'
-	,'nickexam03'
-	,'20001015'
-	,'test3@test.co.kr'
-	,NOW()
-	,'N'
-	,0
+   'testUser03'
+   ,'testUse3ws'
+   ,'N'
+   ,'nickexam03'
+   ,'20001015'
+   ,'test3@test.co.kr'
+   ,NOW()
+   ,'N'
+   ,0
 );
 
--- ---------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 
 -- 메뉴 추가
-
 INSERT INTO MENUTBL(
 CAFE_MENU
 ,CAFE_MENU_DAE
@@ -103,8 +150,6 @@ VALUES (
 ,'00100'
 ,'5400'
 );
-
-COMMIT;
 
 INSERT INTO MENUTBL(
 CAFE_MENU
@@ -146,18 +191,17 @@ VALUES (
 ,'4500'
 );
 
--- ---------------------------------------------------------------------------------------------------
-
-생강차	티	101	3500
-아메리카노	커피	100	5400
-핫 초코	음료	102	4700
-카페 라떼	커피	103	4500
-
--- ---------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-- 한 번 확인
+SELECT * FROM MENUTBL M ;
+SELECT * FROM MEMBERTBL M ;
+-----------------------------------------------------------------------------------------------------
 
 
--- 주문하기
 
+SELECT * FROM ORDERTBL O ;
+
+-- testUser00
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -166,13 +210,10 @@ MEMBER_ID
 )
 VALUES (
 (SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser00')
-,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '100')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '101')
 ,'10'
 ,NOW()
 );
-
-DESC ORDERTBL ;
-
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -185,7 +226,20 @@ VALUES (
 ,'5'
 ,NOW()
 );
+INSERT INTO ORDERTBL(
+MEMBER_ID
+,MEMBER_MENU_NUM
+,MEMBER_ORDER_COUNT
+,MEMBER_ORDER_DATE
+)
+VALUES (
+(SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser00')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '102')
+,'14'
+,NOW()
+);
 
+-- testUser01
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -198,8 +252,6 @@ VALUES (
 ,'40'
 ,NOW()
 );
-
-
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -213,6 +265,7 @@ VALUES (
 ,NOW()
 );
 
+-- testUser02
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -221,11 +274,36 @@ MEMBER_ID
 )
 VALUES (
 (SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser02')
-,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '103')
-,'10'
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '101')
+,'8'
+,NOW()
+);
+INSERT INTO ORDERTBL(
+MEMBER_ID
+,MEMBER_MENU_NUM
+,MEMBER_ORDER_COUNT
+,MEMBER_ORDER_DATE
+)
+VALUES (
+(SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser02')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '101')
+,'12'
+,NOW()
+);
+INSERT INTO ORDERTBL(
+MEMBER_ID
+,MEMBER_MENU_NUM
+,MEMBER_ORDER_COUNT
+,MEMBER_ORDER_DATE
+)
+VALUES (
+(SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser02')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '102')
+,'5'
 ,NOW()
 );
 
+-- testUser03
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -234,105 +312,91 @@ MEMBER_ID
 )
 VALUES (
 (SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser03')
-,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '103')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '101')
+,'10'
+,NOW()
+);
+INSERT INTO ORDERTBL(
+MEMBER_ID
+,MEMBER_MENU_NUM
+,MEMBER_ORDER_COUNT
+,MEMBER_ORDER_DATE
+)
+VALUES (
+(SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser03')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '100')
+,'10'
+,NOW()
+);
+INSERT INTO ORDERTBL(
+MEMBER_ID
+,MEMBER_MENU_NUM
+,MEMBER_ORDER_COUNT
+,MEMBER_ORDER_DATE
+)
+VALUES (
+(SELECT MEMBER_ID FROM MEMBERTBL WHERE MEMBER_ID = 'testUser03')
+,(SELECT CAFE_MENU FROM MENUTBL WHERE CAFE_MENU_NUM = '102')
 ,'12'
 ,NOW()
 );
 
+SELECT * FROM ORDERTBL O ;
 
-testUser00	아메리카노	10	2023-02-04 08:37:33
-testUser00	아메리카노	5	2023-02-04 08:37:53
-testUser01	생강차	40	2023-02-04 08:38:04
-testUser01	핫 초코	14	2023-02-04 08:38:07
-testUser02	카페 라떼	10	2023-02-04 08:38:15
-testUser02	카페 라떼	10	2023-02-04 08:38:19
-testUser03	카페 라떼	12	2023-02-04 08:38:35
 
--- 유저 별 주문 조회
--- testUser00
--- 유저별 메뉴, 갯수, 가격 
-SELECT M.CAFE_MENU, O.MEMBER_ORDER_COUNT , M.CAFE_PRICE, (O.MEMBER_ORDER_COUNT * M.CAFE_PRICE) AS PAY
+-- 결과
+testUser00  생강차   10 2023-03-13 10:50:15
+testUser00  아메리카노 5  2023-03-13 10:50:15
+testUser00  핫 초코  14 2023-03-13 10:50:15
+testUser01  생강차   40 2023-03-13 10:50:15
+testUser01  핫 초코  14 2023-03-13 10:50:15
+testUser02  생강차   8  2023-03-13 10:50:15
+testUser02  생강차   12 2023-03-13 10:50:15
+testUser02  핫 초코  5  2023-03-13 10:50:15
+testUser03  생강차   10 2023-03-13 10:50:15
+testUser03  아메리카노 10 2023-03-13 10:50:15
+testUser03  핫 초코  12 2023-03-13 10:50:15
+
+
+-----------------------------------------------------------------------------------------------------
+
+-- 아래 순서대로 주문하면 번호순서대로 나옴.
+INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
+SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
 FROM MENUTBL M, ORDERTBL O 
 WHERE O.MEMBER_ID = 'testUser00'
 AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
 
-아메리카노	10	5400	54000
-아메리카노	5	5400	27000
-
--- 유저별 메뉴, 갯수, 가격 
-SELECT M.CAFE_MENU, O.MEMBER_ORDER_COUNT , M.CAFE_PRICE, (O.MEMBER_ORDER_COUNT * M.CAFE_PRICE) AS PAY
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser01'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-생강차	40	3500	140000
-핫 초코	14	4700	65800
-
-
-SELECT M.CAFE_MENU, O.MEMBER_ORDER_COUNT , M.CAFE_PRICE, (O.MEMBER_ORDER_COUNT * M.CAFE_PRICE) AS PAY
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser02'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-카페 라떼	10	4500	45000
-카페 라떼	10	4500	45000
-
--- 유저별 메뉴, 갯수, 가격 
-SELECT M.CAFE_MENU, O.MEMBER_ORDER_COUNT , M.CAFE_PRICE, (O.MEMBER_ORDER_COUNT * M.CAFE_PRICE) AS PAY
+INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
+SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
 FROM MENUTBL M, ORDERTBL O 
 WHERE O.MEMBER_ID = 'testUser03'
 AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
 
-카페 라떼	12	4500	54000
+INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
+SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
+FROM MENUTBL M, ORDERTBL O 
+WHERE O.MEMBER_ID = 'testUser02'
+AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
 
+INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
+SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
+FROM MENUTBL M, ORDERTBL O 
+WHERE O.MEMBER_ID = 'testUser01'
+AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
+
+-- 번호 표 발급
+SELECT * FROM SONNIM S ;
 
 -- 번호표 뽑기
 SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser00';
-
--- 결제할 금액 보기
-SELECT MEMBER_ORDER_PAY FROM SONNIM WHERE MEMBER_ORDERNUM = (SELECT MEMBER_ORDERNUM ​
-FROM SONNIM WHERE MEMBER_ID = 'testUser00');
-
-81000
--- ---------------------------------------------------------------------------------------------------
-
--- 주문하기 (결제 )
---  손님 별 추가
-INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
-SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser00'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
-SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser01'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
-SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser02'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY )
-SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser03'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-SELECT * FROM SONNIM ;
-
-2	testUser00	15	81000
-3	testUser01	54	205800
-4	testUser02	20	90000
-5	testUser03	12	54000
-
--- ---------------------------------------------------------------------------------------------------
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser01';
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser02';
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser03';
 
 
--- 매장 리스트에 넣기
+---------------------------------------------------------------------------------------------------
+-- 정산할 테이블에 삽입하기
 INSERT INTO SUBMIT_ORDER (MENU, ORDER_COUNT, ORDER_PAY, ORDER_DATE)
 SELECT DISTINCT M.CAFE_MENU, SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE), NOW()
 FROM  MENUTBL M, ORDERTBL O 
@@ -354,56 +418,43 @@ WHERE M.CAFE_MENU_NUM  = '102'
 AND   M.CAFE_MENU  = '핫 초코'
 AND   O.MEMBER_MENU_NUM ='핫 초코';
 
-INSERT INTO SUBMIT_ORDER (MENU, ORDER_COUNT, ORDER_PAY, ORDER_DATE)
-SELECT DISTINCT M.CAFE_MENU, SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE), NOW()
-FROM  MENUTBL M, ORDERTBL O 
-WHERE M.CAFE_MENU_NUM  = '103'
-AND   M.CAFE_MENU  = '카페 라떼'
-AND   O.MEMBER_MENU_NUM ='카페 라떼';
 
+-------------------------------------------------------------------------------------------------------
+-- 하루 총 매출
+SELECT SUM(ORDER_PAY) FROM SUBMIT_ORDER WHERE ORDER_DATE LIKE '%2023-03-13%';
 
-1	아메리카노	15	81000	2023-02-04 08:44:42
-2	생강차	40	140000	2023-02-04 08:44:45
-3	핫 초코	14	65800	2023-02-04 08:44:46
-4	카페 라떼	32	144000	2023-02-04 08:44:49  (위에서 카페라떼 동일 쿼리 두 번 날림)
-
-
--- 하루 총 매출 
-SELECT SUM(ORDER_PAY) FROM SUBMIT_ORDER WHERE ORDER_DATE LIKE '%2023-02-04%';
-
-430800
-
-
+-- 반드시 여기까지 테이블이 실행된 다음 해야함.
+-- 결제 완료 시
 -- 매장 리스트에 넣고나면 반드시 아래에 두 테이블에서 해당 아이디에 대한 열 삭제를 해야함.
 DELETE FROM SONNIM WHERE MEMBER_ID = 'testUser03';
 DELETE FROM ORDERTBL WHERE MEMBER_ID = 'testUser03';
 
+-- 번호가 많아지면 초기화
+TRUNCATE 'SONNIM';
 
--- ---------------------------------------------------------------------------------------------------
-SELECT * FROM SUBMIT_ORDER SO ;
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 
-
--- 다시 추가해보면 SUBMIT_ORDER 테이블에서 중복이 되지 않고 정렬이 잘 되는 것을 확인할 수 있고 번호표도 중복 안됨.
-
-1	아메리카노	15	81000	2023-02-04 08:44:42
-2	생강차	40	140000	2023-02-04 08:44:45
-3	핫 초코	14	65800	2023-02-04 08:44:46
-4	카페 라떼	32	144000	2023-02-04 08:44:49
-5	아메리카노	15	81000	2023-02-04 08:55:09
-6	생강차	40	140000	2023-02-04 08:55:23
-7	핫 초코	14	65800	2023-02-04 08:56:12
-8	카페 라떼	22	99000	2023-02-04 08:56:16
-9	아메리카노	15	81000	2023-02-04 09:05:35
-10	생강차	40	140000	2023-02-04 09:05:39
-11	핫 초코	14	65800	2023-02-04 09:05:43
-12	카페 라떼	22	99000	2023-02-04 09:05:45
-
--- 다시 해보기
-
-
--- 주문하기
-
+-- 다시 삽입하는 쿼리 프롬프트
 INSERT INTO ORDERTBL(
 MEMBER_ID
 ,MEMBER_MENU_NUM
@@ -416,8 +467,6 @@ VALUES (
 ,'10'
 ,NOW()
 );
-
-DESC ORDERTBL ;
 
 INSERT INTO ORDERTBL(
 MEMBER_ID
@@ -444,7 +493,6 @@ VALUES (
 ,'40'
 ,NOW()
 );
-
 
 INSERT INTO ORDERTBL(
 MEMBER_ID
@@ -485,15 +533,6 @@ VALUES (
 ,NOW()
 );
 
-SELECT * FROM ORDERTBL O ;
-
-
-SELECT M.CAFE_MENU, O.MEMBER_ORDER_COUNT , M.CAFE_PRICE, (O.MEMBER_ORDER_COUNT * M.CAFE_PRICE) AS PAY
-FROM MENUTBL M, ORDERTBL O 
-WHERE O.MEMBER_ID = 'testUser00'
-AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-
 INSERT INTO SONNIM (MEMBER_ID, MEMBER_ORDER_COUNT, MEMBER_ORDER_PAY)
 SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE)
 FROM MENUTBL M, ORDERTBL O 
@@ -517,9 +556,6 @@ SELECT DISTINCT O.MEMBER_ID,  SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT 
 FROM MENUTBL M, ORDERTBL O 
 WHERE O.MEMBER_ID = 'testUser03'
 AND   M.CAFE_MENU = O.MEMBER_MENU_NUM;
-
-SELECT * FROM SONNIM S ;
-
 
 INSERT INTO SUBMIT_ORDER (MENU, ORDER_COUNT, ORDER_PAY, ORDER_DATE)
 SELECT DISTINCT M.CAFE_MENU, SUM(MEMBER_ORDER_COUNT), SUM(O.MEMBER_ORDER_COUNT * M.CAFE_PRICE), NOW()
@@ -549,8 +585,45 @@ WHERE M.CAFE_MENU_NUM  = '103'
 AND   M.CAFE_MENU  = '카페 라떼'
 AND   O.MEMBER_MENU_NUM ='카페 라떼';
 
+-- 번호표 중복 안됨.
 SELECT * FROM SONNIM S ;
+
+-- 번호표 중복 안됨.
+SELECT * FROM SONNIM S ;
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser00';
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser01';
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser02';
+SELECT MEMBER_ORDERNUM FROM SONNIM WHERE MEMBER_ID = 'testUser03';
+
+
+SELECT * FROM SUBMIT_ORDER;
+1  아메리카노 15 81000 2023-03-13 10:56:36
+2  생강차   80 280000   2023-03-13 10:56:38
+3  핫 초코  45 211500   2023-03-13 10:56:40
+4  아메리카노 15 81000 2023-03-13 11:03:58
+5  생강차   40 140000   2023-03-13 11:03:58
+6  핫 초코  14 65800 2023-03-13 11:03:58
+7  카페 라떼 22 99000 2023-03-13 11:03:58
+
+
+SELECT SUM(ORDER_PAY) FROM SUBMIT_ORDER WHERE ORDER_DATE LIKE '%2023-03-13%';
+
+
+-- 반드시 여기까지 테이블이 실행된 다음 해야함.
+-- 결제 완료 시
+-- 매장 리스트에 넣고나면 반드시 아래에 두 테이블에서 해당 아이디에 대한 열 삭제를 해야함.
+DELETE FROM SONNIM WHERE MEMBER_ID = 'testUser00';
+DELETE FROM ORDERTBL WHERE MEMBER_ID = 'testUser00';
+
+DELETE FROM SONNIM WHERE MEMBER_ID = 'testUser01';
+DELETE FROM ORDERTBL WHERE MEMBER_ID = 'testUser01';
+
+DELETE FROM SONNIM WHERE MEMBER_ID = 'testUser02';
+DELETE FROM ORDERTBL WHERE MEMBER_ID = 'testUser02';
+
 DELETE FROM SONNIM WHERE MEMBER_ID = 'testUser03';
 DELETE FROM ORDERTBL WHERE MEMBER_ID = 'testUser03';
 
-SELECT * FROM ORDERTBL O ;
+
+-- 삭제를 해도 정산용 테이블에 기록은 남아있음.
+SELECT * FROM SUBMIT_ORDER SO ;
