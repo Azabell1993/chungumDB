@@ -3,7 +3,7 @@
 
 CREATE TABLE MENUTBL (
    CAFE_MENU            VARCHAR(20)      PRIMARY KEY         COMMENT '카페 메뉴'
-   ,CAFE_MENU_DAE         INT            NOT NULL         COMMENT '메뉴 대분류'
+   ,CAFE_MENU_DAE       VARCHAR(20)      NOT NULL         COMMENT '메뉴 대분류'
    ,CAFE_MENU_NUM         INT            NOT NULL         COMMENT '메뉴 소분류(넘버링)'
    ,CAFE_PRICE            INT            NOT NULL         COMMENT '카페 가격'
 ) DEFAULT CHARSET=utf8mb4;
